@@ -14,7 +14,7 @@ export function getTrendingMovies() {
   return axios.get(`${BASE_URL}trending/movie/day`, options);
 }
 
-export function getMovieByQuery(query) {
+export function getMovieByQuery({query}) {
   return axios.get(`${BASE_URL}search/movie?query=${query}`, options);
 }
 

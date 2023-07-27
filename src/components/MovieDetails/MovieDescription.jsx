@@ -13,7 +13,7 @@ export default function MovieDescription({ movie }) {
     return ( 
         <div>
             <img src={imageUrl} alt="" />
-            <h1>{title}({movieYear})</h1>
+            <h1>{title} ({movieYear})</h1>
             <p>{releasDate}</p>
             <p>{movieGenres}</p>
             <p>Rating: {rating}</p>

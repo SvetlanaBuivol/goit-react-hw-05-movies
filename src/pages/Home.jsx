@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getTrendingMovies } from 'services/movieAPI';
-import TrendingMovies from 'components/Home/TrendingMovies';
+import MoviesList from 'components/Home/MoviesList';
 import Loader from 'components/Loader/Loader';
 
 function Home() {
@@ -27,7 +27,7 @@ function Home() {
   return (
     <>
       {loading && <Loader />}
-      <TrendingMovies movies={movies} />
+      <MoviesList movies={movies} />
     </>
   );
 }
