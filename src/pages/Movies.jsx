@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Notify } from 'notiflix';
 import Loader from 'components/Loader/Loader';
 import SearchInput from 'components/SearchInput/SearchInput';
 import MoviesList from 'components/Home/MoviesList';
@@ -9,14 +10,22 @@ function Movies() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (!query) return;
-        
+  useEffect(() => {
+    if (!query) return;
+
     setLoading(true);
 
-    getMovieByQuery({query})
-        .then(response => {
-          console.log(response.data.results)
+    getMovieByQuery({ query })
+      .then(response => {
+        if (!response.data.results.length) {
+          Notify.failure(
+            'Sorry, there are no movies matching your search query. Please try again.',
+            { position: 'center-center' }
+          );
+          return;
+        }
+
+        console.log(response.data.results);
         const moviesByQuery = response.data.results.map(movie => ({
           title: movie.title,
           id: movie.id,
@@ -27,10 +36,9 @@ function Movies() {
       .finally(() => {
         setLoading(false);
       });
-    }, [query]);
-    console.log(movies)
+  }, [query]);
 
-  const handleFormSubmit = (querySearch) => {
+  const handleFormSubmit = querySearch => {
     setQuery(querySearch);
     setLoading(true);
     setMovies(null);

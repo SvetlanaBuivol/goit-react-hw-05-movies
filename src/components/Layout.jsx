@@ -1,12 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom';
 
-export  function Layout() {
+export function Layout() {
   return (
     <div>
-      <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="movies">Movies</NavLink>
-      </nav>
+      <header>
+        <nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="movies">Movies</NavLink>
+        </nav>
+      </header>
       <main>
         <Outlet />
       </main>

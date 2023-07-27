@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/movieAPI';
 import MovieDescription from 'components/MovieDetails/MovieDescription';
 import Loader from 'components/Loader/Loader';
@@ -13,14 +13,15 @@ function MovieDetails() {
     setLoading(true);
 
     getMovieDetails(movieId)
-      .then(resp => {
+        .then(({ data }) => {
+            const { poster_path, title, release_date, genres, vote_average, overview} = data;
         setMovie({
-          img: resp.data.poster_path,
-          title: resp.data.title,
-          releaseDate: resp.data.release_date,
-          genres: resp.data.genres,
-          rating: resp.data.vote_average,
-          overview: resp.data.overview,
+          img: poster_path,
+          title: title,
+          releaseDate: release_date,
+          genres: genres,
+          rating: vote_average,
+          overview: overview,
         });
       })
       .catch(error => console.log(error))
@@ -33,6 +34,15 @@ function MovieDetails() {
     <>
       {loading && <Loader />}
       <MovieDescription movie={movie} />
+      <ul>
+        <li>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+      <Outlet />
     </>
   );
 }
