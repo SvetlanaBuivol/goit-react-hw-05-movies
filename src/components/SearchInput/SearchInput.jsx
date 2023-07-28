@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 export default function SearchInput({ onSubmit }) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const searchQuery = searchParams.get('query') ?? '';
+  let searchQuery = searchParams.get('query') ?? '';
 
   const handleMovieChange = event => {
     if (event.target.value === '') {
@@ -19,8 +19,7 @@ export default function SearchInput({ onSubmit }) {
       Notify.warning('Please enter a value', { position: 'center-center' });
       return;
     }
-    onSubmit(searchQuery);
-    // setQuery('');
+    onSubmit(searchQuery); 
   };
 
   return (

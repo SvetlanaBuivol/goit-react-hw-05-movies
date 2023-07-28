@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/movieAPI';
 import MovieDescription from 'components/MovieDetails/MovieDescription';
@@ -9,7 +9,7 @@ function MovieDetails() {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
-  console.log("MovieDetails  location", location)
+  const backLocationRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +37,7 @@ function MovieDetails() {
   return (
     <>
       {loading && <Loader />}
-      <Link to={location.state.from}>Go back</Link>
+      <Link to={backLocationRef.current}>Go back</Link>
       <MovieDescription movie={movie} />
       <ul>
         <li>
@@ -47,7 +47,9 @@ function MovieDetails() {
           <Link to="reviews">Reviews</Link>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<Loader/>}>
+        <Outlet />
+        </Suspense>
     </>
   );
 }
