@@ -1,15 +1,13 @@
+import { useState } from 'react';
 import { Notify } from 'notiflix';
 import { useSearchParams } from 'react-router-dom';
 
 export default function SearchInput({ onSubmit }) {
   const [searchParams, setSearchParams] = useSearchParams()
-  let searchQuery = searchParams.get('query') ?? '';
+  const[searchQuery, setSearchQuery] = useState(()=>searchParams.get('query') ?? '')
 
   const handleMovieChange = event => {
-    if (event.target.value === '') {
-      return setSearchParams({});
-    }
-    setSearchParams({query: event.target.value})
+    setSearchQuery(event.target.value);
   };
 
   const handleSubmit = event => {
@@ -19,7 +17,10 @@ export default function SearchInput({ onSubmit }) {
       Notify.warning('Please enter a value', { position: 'center-center' });
       return;
     }
+    setSearchParams({ query: searchQuery });
+    
     onSubmit(searchQuery); 
+     setSearchQuery('');
   };
 
   return (

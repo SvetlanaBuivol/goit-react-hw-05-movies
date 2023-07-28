@@ -8,6 +8,7 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   const location = useLocation();
   const backLocationRef = useRef(location.state?.from ?? '/');
 
