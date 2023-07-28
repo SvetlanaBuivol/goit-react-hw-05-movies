@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Notify } from 'notiflix';
 import Loader from 'components/Loader/Loader';
 import SearchInput from 'components/SearchInput/SearchInput';
 import MoviesList from 'components/Home/MoviesList';
 import { getMovieByQuery } from 'services/movieAPI';
+import { MoviesContext } from 'Context/Context';
 
 function Movies() {
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
+  const { movies, setMovies } = useContext(MoviesContext);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,7 +19,6 @@ function Movies() {
 
       try {
         const { results } = await getMovieByQuery({ query });
-        console.log(results);
 
         if (!results.length) {
           Notify.failure(
@@ -39,7 +39,7 @@ function Movies() {
       }
     };
     fetchData();
-  }, [query]);
+  }, [query, setMovies]);
 
   const handleFormSubmit = querySearch => {
     setQuery(querySearch);
