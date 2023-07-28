@@ -1,22 +1,26 @@
-import { useState } from 'react';
 import { Notify } from 'notiflix';
+import { useSearchParams } from 'react-router-dom';
 
-export default function SearchInput({onSubmit}) {
-  const [query, setQuery] = useState('');
+export default function SearchInput({ onSubmit }) {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchQuery = searchParams.get('query') ?? '';
 
   const handleMovieChange = event => {
-    setQuery(event.currentTarget.value.toLowerCase());
+    if (event.target.value === '') {
+      return setSearchParams({});
+    }
+    setSearchParams({query: event.target.value})
   };
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    if (query.trim() === '') {
+    if (searchQuery.trim() === '') {
       Notify.warning('Please enter a value', { position: 'center-center' });
       return;
     }
-    onSubmit(query);
-    setQuery('');
+    onSubmit(searchQuery);
+    // setQuery('');
   };
 
   return (
@@ -27,7 +31,7 @@ export default function SearchInput({onSubmit}) {
         autoFocus
         placeholder="Search images and photos"
         onChange={handleMovieChange}
-        value={query}
+        value={searchQuery}
       />
       <button type="submit">
         <span>Search</span>

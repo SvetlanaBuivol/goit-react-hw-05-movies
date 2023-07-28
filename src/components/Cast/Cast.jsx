@@ -10,12 +10,11 @@ export default function CastList() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    const fetchData = async () => {
+      setLoading(true);
 
-    getMovieCredits(movieId)
-      .then(({ data }) => {
-        const { cast } = data;
-
+      try {
+        const { cast } = await getMovieCredits(movieId);
         const actorsArray = cast.map(
           ({ profile_path, original_name, character, cast_id }) => ({
             img: profile_path,
@@ -25,11 +24,13 @@ export default function CastList() {
           })
         );
         setActors(actorsArray);
-      })
-      .catch(error => console.log(error))
-      .finally(() => {
+      } catch (error) {
+        console.log(error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchData();
   }, [movieId]);
 
   return (

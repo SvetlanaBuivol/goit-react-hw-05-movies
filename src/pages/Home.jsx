@@ -2,32 +2,38 @@ import { useEffect, useState } from 'react';
 import { getTrendingMovies } from 'services/movieAPI';
 import MoviesList from 'components/Home/MoviesList';
 import Loader from 'components/Loader/Loader';
+import { useLocation } from 'react-router-dom';
 
 function Home() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
+   const location = useLocation();
 
-    getTrendingMovies()
-      .then(response => {
-        const trendingMovies = response.data.results.map(movie => ({
-          title: movie.title,
-          id: movie.id,
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+
+      try {
+        const { results } = await getTrendingMovies();
+        const trendingMovies = results.map(({ title, id }) => ({
+          title,
+          id,
         }));
         setMovies(trendingMovies);
-      })
-      .catch(error => console.log(error))
-      .finally(() => {
+      } catch (error) {
+        console.log(error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchData();
   }, []);
 
   return (
     <>
       {loading && <Loader />}
-      <MoviesList movies={movies} />
+      <MoviesList state={{ from: location }} movies={movies} />
     </>
   );
 }

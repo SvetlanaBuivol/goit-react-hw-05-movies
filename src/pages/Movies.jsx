@@ -13,29 +13,32 @@ function Movies() {
   useEffect(() => {
     if (!query) return;
 
-    setLoading(true);
+    const fetchData = async () => {
+      setLoading(true);
 
-    getMovieByQuery({ query })
-      .then(response => {
-        if (!response.data.results.length) {
+      try {
+        const { results } = await getMovieByQuery({ query });
+        console.log(results);
+
+        if (!results.length) {
           Notify.failure(
             'Sorry, there are no movies matching your search query. Please try again.',
             { position: 'center-center' }
           );
           return;
         }
-
-        console.log(response.data.results);
-        const moviesByQuery = response.data.results.map(movie => ({
-          title: movie.title,
-          id: movie.id,
+        const moviesByQuery = results.map(({ title, id }) => ({
+          title,
+          id,
         }));
         setMovies(moviesByQuery);
-      })
-      .catch(error => console.log(error))
-      .finally(() => {
+      } catch (error) {
+        console.log(error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchData();
   }, [query]);
 
   const handleFormSubmit = querySearch => {
@@ -48,7 +51,7 @@ function Movies() {
     <>
       <SearchInput onSubmit={handleFormSubmit} />
       {loading && <Loader />}
-      <MoviesList movies={movies} />
+      {movies && <MoviesList movies={movies} />}
     </>
   );
 }

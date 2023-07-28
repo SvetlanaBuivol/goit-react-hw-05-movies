@@ -1,18 +1,19 @@
 import imgDefault from '../../imgDefault/imgDefault.jpg';
 
 export default function CastItem({ actor }) {
+  const { img, name, character } = actor;
   return (
     <li>
       <img
         src={
-          actor.img
-            ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${actor.img}`
+          img
+            ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${img}`
             : imgDefault
         }
         alt=""
       />
-      <h3>{actor.name}</h3>
-      <p>Character: {actor.character}</p>
+      <h3>{name}</h3>
+      <p>Character: {character}</p>
     </li>
   );
 }
