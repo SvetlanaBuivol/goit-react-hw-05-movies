@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Notify } from 'notiflix';
 import { useSearchParams } from 'react-router-dom';
+import { RiSearchLine } from 'react-icons/ri';
+import { Form, Input, SearchButton, SearchInputWrapper } from './SearchInput.styled';
 
 export default function SearchInput({ onSubmit }) {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -24,18 +26,21 @@ export default function SearchInput({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <Form onSubmit={handleSubmit}>
+      <SearchInputWrapper>
+      <Input
         type="text"
         autoComplete="off"
         autoFocus
-        placeholder="Search images and photos"
+        placeholder="Search movie"
         onChange={handleMovieChange}
         value={searchQuery}
       />
-      <button type="submit">
+        <SearchButton type="submit">
+          <RiSearchLine/>
         <span>Search</span>
-      </button>
-    </form>
+        </SearchButton>
+        </SearchInputWrapper>
+    </Form>
   );
 }

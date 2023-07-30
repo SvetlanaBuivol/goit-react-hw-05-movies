@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getMovieCredits } from 'services/movieAPI';
 import Loader from 'components/Loader/Loader';
 import CastItem from 'components/CastItem/CastItem';
+import { ActorsList, ActorsUl } from './Cast.styled';
 
 export default function CastList() {
   const { movieId } = useParams();
@@ -34,13 +35,13 @@ export default function CastList() {
   }, [movieId]);
 
   return (
-    <div>
+    <ActorsList>
       {loading && <Loader />}
-      <ul>
+      <ActorsUl>
         {actors.map(actor => (
           <CastItem key={actor.id} actor={actor} />
         ))}
-      </ul>
-    </div>
+      </ActorsUl>
+    </ActorsList>
   );
 }

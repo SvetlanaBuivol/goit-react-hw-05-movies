@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import imgDefault from '../../imgDefault/noImageAvailable.jpg';
+import {
+  BackIcon,
+  GoBackLink,
+  MovieDetailsContainer,
+  MovieDetailsContent,
+  MovieGenres,
+  MovieImage,
+  MovieInfo,
+  MovieReleaseDate,
+  MovieTitle,
+  MovieYear,
+  NavigationLinkItem,
+  NavigationLinks,
+  OverviewHeading,
+  OverviewText,
+  Rating,
+} from './MovieDescription.styled';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function MovieDescription({ movie }) {
+  const location = useLocation();
+  const backLocationRef = useRef(location.state?.from ?? '/');
+
   if (!movie) {
     return null;
   }
+
   const { releaseDate, img, genres, title, rating, overview } = movie;
   const movieYear = releaseDate?.split('-')[0];
   const imageUrl = img ? `https://image.tmdb.org/t/p/w500${img}` : imgDefault;
@@ -13,19 +35,35 @@ export default function MovieDescription({ movie }) {
     ?.map(genre => genre.name)
     .join(', ')
     .toLowerCase();
+  
 
   return (
-    <div>
-      <img src={imageUrl} alt="" />
-      <h1>
-        {title} ({movieYear})
-      </h1>
-      <p>{releasDate}</p>
-      <p>{movieGenres}</p>
-      <p>Rating: {rating}</p>
-      <h2>Overview</h2>
-      <p>{overview}</p>
-    </div>
+    <MovieDetailsContainer>
+      <GoBackLink to={backLocationRef.current}><BackIcon/>Go back</GoBackLink>
+      <MovieDetailsContent>
+        <MovieImage>
+          <img src={imageUrl} alt="" />
+          </MovieImage>
+      <MovieInfo>
+        <MovieTitle>
+          {title} <MovieYear>({movieYear})</MovieYear>
+        </MovieTitle>
+        <MovieReleaseDate>{releasDate}</MovieReleaseDate>
+        <MovieGenres>{movieGenres}</MovieGenres>
+        <Rating>Rating: {rating}</Rating>
+        <OverviewHeading>Overview</OverviewHeading>
+        <OverviewText>{overview}</OverviewText>
+        </MovieInfo>
+      </MovieDetailsContent>
+      <NavigationLinks>
+        <NavigationLinkItem>
+          <Link to="cast">Cast</Link>
+        </NavigationLinkItem>
+        <NavigationLinkItem>
+          <Link to="reviews">Reviews</Link>
+        </NavigationLinkItem>
+      </NavigationLinks>
+    </MovieDetailsContainer>
   );
 }
 

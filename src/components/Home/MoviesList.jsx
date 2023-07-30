@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { MoviesListContainer, MovieLink, MovieItem } from './Home.styled';
 
 export default function MoviesList({ movies, state }) {
   return (
-    <ul>
+    <MoviesListContainer>
       {movies &&
         movies.map(({id, title}) => (
-          <li key={id}>
-            <Link to={`/movies/${id}`} state={state}>{title}</Link>
-          </li>
+          <MovieItem key={id}>
+            <MovieLink to={`/movies/${id}`} state={state}>{title}</MovieLink>
+          </MovieItem>
         ))}
-    </ul>
+    </MoviesListContainer>
   );
 }

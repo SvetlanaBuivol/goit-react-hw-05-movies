@@ -1,10 +1,17 @@
 import imgDefault from '../../imgDefault/imgDefault.jpg';
+import {
+  CastItemCharacter,
+  CastItemContainer,
+  CastItemImage,
+  CastItemInfo,
+  CastItemName,
+} from './CastItem.styled';
 
 export default function CastItem({ actor }) {
   const { img, name, character } = actor;
   return (
-    <li>
-      <img
+    <CastItemContainer>
+      <CastItemImage
         src={
           img
             ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${img}`
@@ -12,8 +19,10 @@ export default function CastItem({ actor }) {
         }
         alt=""
       />
-      <h3>{name}</h3>
-      <p>Character: {character}</p>
-    </li>
+      <CastItemInfo>
+        <CastItemName>{name}</CastItemName>
+        <CastItemCharacter>Character: {character}</CastItemCharacter>
+      </CastItemInfo>
+    </CastItemContainer>
   );
 }
