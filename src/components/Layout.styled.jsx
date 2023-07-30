@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-
 
 export const HeaderContainer = styled.header`
   position: sticky;

@@ -35,24 +35,26 @@ export default function MovieDescription({ movie }) {
     ?.map(genre => genre.name)
     .join(', ')
     .toLowerCase();
-  
 
   return (
     <MovieDetailsContainer>
-      <GoBackLink to={backLocationRef.current}><BackIcon/>Go back</GoBackLink>
+      <GoBackLink to={backLocationRef.current}>
+        <BackIcon />
+        Go back
+      </GoBackLink>
       <MovieDetailsContent>
         <MovieImage>
           <img src={imageUrl} alt="" />
-          </MovieImage>
-      <MovieInfo>
-        <MovieTitle>
-          {title} <MovieYear>({movieYear})</MovieYear>
-        </MovieTitle>
-        <MovieReleaseDate>{releasDate}</MovieReleaseDate>
-        <MovieGenres>{movieGenres}</MovieGenres>
-        <Rating>Rating: {rating}</Rating>
-        <OverviewHeading>Overview</OverviewHeading>
-        <OverviewText>{overview}</OverviewText>
+        </MovieImage>
+        <MovieInfo>
+          <MovieTitle>
+            {title} <MovieYear>({movieYear})</MovieYear>
+          </MovieTitle>
+          <MovieReleaseDate>{releasDate}</MovieReleaseDate>
+          <MovieGenres>{movieGenres}</MovieGenres>
+          <Rating>Rating: {rating}</Rating>
+          <OverviewHeading>Overview</OverviewHeading>
+          <OverviewText>{overview}</OverviewText>
         </MovieInfo>
       </MovieDetailsContent>
       <NavigationLinks>

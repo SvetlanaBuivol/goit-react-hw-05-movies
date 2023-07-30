@@ -11,7 +11,7 @@ const options = {
 };
 
 export async function getTrendingMovies() {
-    try {
+  try {
     const response = await axios.get(`${BASE_URL}trending/movie/day`, options);
     return response.data;
   } catch (error) {
@@ -21,7 +21,10 @@ export async function getTrendingMovies() {
 
 export async function getMovieByQuery({ query }) {
   try {
-    const response = await axios.get(`${BASE_URL}search/movie?query=${query}`, options);
+    const response = await axios.get(
+      `${BASE_URL}search/movie?query=${query}`,
+      options
+    );
     return response.data;
   } catch (error) {
     throw new Error(error.message);
@@ -29,28 +32,28 @@ export async function getMovieByQuery({ query }) {
 }
 
 export async function getMovieDetails(id) {
-    try {
-        const response = await axios.get(`${BASE_URL}movie/${id}`, options)
-        return response.data;
-    } catch (error) {
-        throw new Error(error.massage);
-    }
+  try {
+    const response = await axios.get(`${BASE_URL}movie/${id}`, options);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.massage);
+  }
 }
 
 export async function getMovieCredits(id) {
-    try {
-        const response = await axios.get(`${BASE_URL}movie/${id}/credits`, options)
-        return response.data;
-    } catch (error) {
-        throw new Error(error.massage);
-    }
+  try {
+    const response = await axios.get(`${BASE_URL}movie/${id}/credits`, options);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.massage);
+  }
 }
 
 export async function getMovieReviews(id) {
-    try {
-        const response = await axios.get(`${BASE_URL}movie/${id}/reviews`, options)
-        return response.data;
-    } catch (error) {
-        throw new Error(error.massage);
-    }
+  try {
+    const response = await axios.get(`${BASE_URL}movie/${id}/reviews`, options);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.massage);
+  }
 }

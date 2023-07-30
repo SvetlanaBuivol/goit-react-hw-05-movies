@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 export const MovieDetailsContainer = styled.div`
@@ -85,25 +85,24 @@ export const NavigationLinkItem = styled.li`
     text-decoration: none;
     color: #555;
     font-size: 16px;
-    transition: color 0.3s ease,
-    font-weight 0.3s ease;
+    transition: color 0.3s ease, font-weight 0.3s ease;
 
-     &:hover {
-    color: #333;
-    font-weight: bold;
-     }
+    &:hover {
+      color: #333;
+      font-weight: bold;
+    }
   }
 `;
 
 export const GoBackLink = styled(Link)`
-margin-right: auto;
+  margin-right: auto;
   text-decoration: none;
   color: #555;
   font-size: 16px;
   font-weight: bold;
   transition: color 0.3s ease;
 
-   &:hover {
+  &:hover {
     color: #333;
     font-weight: bold;
   }

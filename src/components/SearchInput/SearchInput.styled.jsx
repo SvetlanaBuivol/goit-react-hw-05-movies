@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Form = styled.form`
   display: flex;
@@ -25,8 +25,8 @@ export const Input = styled.input`
     border-color: #555;
 
     &:focus {
-        border-color: #555;
-        box-shadow: 0 0 5px rgba(193, 189, 185, 0.368);
+      border-color: #555;
+      box-shadow: 0 0 5px rgba(193, 189, 185, 0.368);
     }
   }
 `;

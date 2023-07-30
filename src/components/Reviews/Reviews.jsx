@@ -2,7 +2,13 @@ import Loader from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'services/movieAPI';
-import { NoReviewsMessage, ReviewAuthor, ReviewContent, ReviewItem, ReviewsContainer } from './Reviews.styled';
+import {
+  NoReviewsMessage,
+  ReviewAuthor,
+  ReviewContent,
+  ReviewItem,
+  ReviewsContainer,
+} from './Reviews.styled';
 
 export default function Reviews() {
   const { movieId } = useParams();
@@ -46,7 +52,9 @@ export default function Reviews() {
             </ReviewItem>
           ))
         ) : (
-          <NoReviewsMessage>We don't have any reviews for this movie</NoReviewsMessage>
+          <NoReviewsMessage>
+            We don't have any reviews for this movie
+          </NoReviewsMessage>
         )}
       </ul>
     </ReviewsContainer>

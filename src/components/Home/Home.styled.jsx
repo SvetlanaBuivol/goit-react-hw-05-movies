@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import imgDefault from  '../../imgDefault/qwe.jpg';
+import imgDefault from '../../imgDefault/qwe.jpg';
 
 export const MoviesListContainer = styled.ul`
   list-style: none;
@@ -16,7 +16,7 @@ export const MovieItem = styled.li`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: scale(1.05);
   }
@@ -33,10 +33,10 @@ export const MovieLink = styled(Link)`
   background-image: url(${imgDefault});
   background-size: cover;
   background-position: center;
-  backdrop-filter: blur 5px;  
-   transition: background-blur 0.3s ease;
-  
+  backdrop-filter: blur 5px;
+  transition: background-blur 0.3s ease;
+
   &:hover {
-    backdrop-filter: blur 10px; 
+    backdrop-filter: blur 10px;
   }
 `;

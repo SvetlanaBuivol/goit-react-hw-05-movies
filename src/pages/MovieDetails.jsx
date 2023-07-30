@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
-import {  Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/movieAPI';
 import MovieDescription from 'components/MovieDetails/MovieDescription';
 import Loader from 'components/Loader/Loader';
@@ -8,16 +8,20 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
-  
-  // const location = useLocation();
-  // const backLocationRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const fetchData = async () => {
-    setLoading(true);
+      setLoading(true);
 
       try {
-        const { poster_path, title, release_date, genres, vote_average, overview } = await getMovieDetails(movieId);
+        const {
+          poster_path,
+          title,
+          release_date,
+          genres,
+          vote_average,
+          overview,
+        } = await getMovieDetails(movieId);
         setMovie({
           img: poster_path,
           title,
@@ -31,18 +35,17 @@ function MovieDetails() {
       } finally {
         setLoading(false);
       }
-    }
+    };
     fetchData();
   }, [movieId]);
 
   return (
     <>
       {loading && <Loader />}
-      {/* <Link to={backLocationRef.current}>Go back</Link> */}
       <MovieDescription movie={movie} />
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
-        </Suspense>
+      </Suspense>
     </>
   );
 }

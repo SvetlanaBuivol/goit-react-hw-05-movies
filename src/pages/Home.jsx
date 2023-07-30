@@ -8,7 +8,7 @@ function Home() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-   const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
