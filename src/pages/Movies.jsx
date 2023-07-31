@@ -1,9 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Notify } from 'notiflix';
 import Loader from 'components/Loader/Loader';
 import SearchInput from 'components/SearchInput/SearchInput';
-import MoviesList from 'components/Home/MoviesList';
+import MoviesList from 'components/Home/Home';
 import { getMovieByQuery } from 'services/movieAPI';
 import { MoviesContext } from 'Context/Context';
 
@@ -11,8 +10,6 @@ function Movies() {
   const [query, setQuery] = useState('');
   const { movies, setMovies } = useContext(MoviesContext);
   const [loading, setLoading] = useState(false);
-
-  const location = useLocation();
 
   useEffect(() => {
     if (!query) return;
@@ -54,7 +51,7 @@ function Movies() {
     <>
       <SearchInput onSubmit={handleFormSubmit} />
       {loading && <Loader />}
-      {movies && <MoviesList state={{ from: location }} movies={movies} />}
+      {movies && <MoviesList movies={movies} />}
     </>
   );
 }

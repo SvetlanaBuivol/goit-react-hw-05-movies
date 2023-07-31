@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getTrendingMovies } from 'services/movieAPI';
-import MoviesList from 'components/Home/MoviesList';
+import MoviesList from 'components/Home/Home';
 import Loader from 'components/Loader/Loader';
 import { useLocation } from 'react-router-dom';
 

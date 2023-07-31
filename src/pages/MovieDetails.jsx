@@ -1,12 +1,12 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/movieAPI';
-import MovieDescription from 'components/MovieDetails/MovieDescription';
+import MovieDescription from 'components/MovieDescription/MovieDescription';
 import Loader from 'components/Loader/Loader';
 
 function MovieDetails() {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -38,6 +38,10 @@ function MovieDetails() {
     };
     fetchData();
   }, [movieId]);
+ 
+  if (!movie) {
+    return;
+}
 
   return (
     <>
