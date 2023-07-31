@@ -38,15 +38,15 @@ function MovieDetails() {
     };
     fetchData();
   }, [movieId]);
- 
+
   if (!movie) {
     return;
-}
+  }
 
   return (
     <>
       {loading && <Loader />}
-      <MovieDescription movie={movie} />
+      {movie && <MovieDescription movie={movie} />}
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
